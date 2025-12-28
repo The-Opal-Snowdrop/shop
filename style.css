@@ -25,7 +25,7 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 0.8rem 5%; /* Adjusted padding */
+    padding: 0.5rem 5%;
     background: var(--white);
     box-shadow: 0 2px 5px rgba(0,0,0,0.05);
     position: sticky;
@@ -33,16 +33,18 @@ body {
     z-index: 1000;
 }
 
-/* NEW LOGO STYLES */
+/* LOGO STYLES */
 .logo-container {
     display: flex;
     align-items: center;
-    gap: 10px;
+    gap: 15px; /* Adds space between logo and text */
 }
 
+/* This is a backup rule in case the inline style is missed */
 .nav-logo {
-    height: 50px; /* Adjust this to make your logo bigger or smaller */
+    height: 60px;
     width: auto;
+    object-fit: contain;
 }
 
 .logo-text {
@@ -51,7 +53,13 @@ body {
     font-weight: 700;
     color: var(--primary-color);
 }
-/* END NEW LOGO STYLES */
+
+/* Responsive Logo Text: Hide text on very small screens if it gets crowded */
+@media (max-width: 480px) {
+    .logo-text {
+        font-size: 1.1rem;
+    }
+}
 
 .nav-links {
     list-style: none;
@@ -78,6 +86,7 @@ body {
 /* Hero Section */
 .hero {
     height: 60vh;
+    /* You can update this URL to your own hero image later */
     background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('https://placehold.co/1200x600/e0e0e0/555?text=Candle+Hero+Image');
     background-size: cover;
     background-position: center;
