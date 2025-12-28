@@ -20,30 +20,29 @@ function toggleCart() {
 }
 
 /* =========================================
-   2. Bespoke Form Handler (Prevents Redirect)
+   2. Bespoke Form Handler (No Redirect)
    ========================================= */
 
-// We wrap this in an event listener to make sure the HTML is loaded first
+// Wait for the DOM to load
 document.addEventListener("DOMContentLoaded", function() {
 
     const form = document.getElementById("contactForm");
     const statusMsg = document.getElementById("form-status");
 
-    // Only run this code if the form actually exists on the page
     if (form) {
         form.addEventListener("submit", function(event) {
             
-            // 1. STOP the form from redirecting to a new page
+            // 1. Prevent the browser from going to the new page
             event.preventDefault(); 
 
-            // 2. Gather the data
+            // 2. Gather form data
             const formData = new FormData(form);
 
-            // 3. Update the UI to show we are working
-            statusMsg.innerText = "Sending request...";
+            // 3. Show "Sending..." message
+            statusMsg.innerText = "Sending your request...";
             statusMsg.style.color = "#555";
 
-            // 4. Send the data silently using Fetch
+            // 4. Send silently
             fetch(form.action, {
                 method: "POST",
                 body: formData,
@@ -53,12 +52,12 @@ document.addEventListener("DOMContentLoaded", function() {
             })
             .then(response => {
                 if (response.ok) {
-                    // Success: Show message and Reset Form
+                    // Success!
                     statusMsg.innerText = "Thank you! We have received your request.";
                     statusMsg.style.color = "green";
-                    form.reset(); 
+                    form.reset(); // Clears the form inputs
                 } else {
-                    // Error from server
+                    // Error
                     response.json().then(data => {
                         if (Object.hasOwn(data, 'errors')) {
                             statusMsg.innerText = data["errors"].map(error => error["message"]).join(", ");
@@ -70,7 +69,6 @@ document.addEventListener("DOMContentLoaded", function() {
                 }
             })
             .catch(error => {
-                // Network error
                 statusMsg.innerText = "Oops! Network error. Please try again.";
                 statusMsg.style.color = "red";
             });
