@@ -10,13 +10,18 @@
 <body>
 
     <nav class="navbar">
-        <div class="logo">The Opal Snowdrop 🌸</div>
+        <div class="logo-container">
+            <img src="logo.png" alt="The Opal Snowdrop Logo" class="nav-logo">
+            <span class="logo-text">The Opal Snowdrop 🌸</span>
+        </div>
+        
         <ul class="nav-links">
             <li><a href="#home">Home</a></li>
             <li><a href="#candles">Candles</a></li>
             <li><a href="#wax-melts">Wax Melts</a></li>
             <li><a href="#bespoke">Bespoke</a></li>
         </ul>
+        
         <div class="cart-icon" onclick="toggleCart()">
             🛒 <span id="cart-count">0</span>
         </div>
@@ -93,7 +98,7 @@
                 </ul>
             </div>
             <div class="bespoke-form-wrapper">
-                <form id="contactForm" action="https://formsubmit.co/theopalsnowdrop@gmail.com" method="POST">
+                <form id="contactForm" action="https://formsubmit.co/ajax/theopalsnowdrop@gmail.com" method="POST">
                     <h3>Start Your Commission</h3>
                     
                     <input type="hidden" name="_subject" value="New Bespoke Commission Request!">
