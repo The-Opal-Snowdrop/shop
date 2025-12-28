@@ -93,19 +93,28 @@
                 </ul>
             </div>
             <div class="bespoke-form-wrapper">
-                <form id="bespoke-form" onsubmit="handleBespokeSubmit(event)">
+                <form id="bespoke-form" action="https://formsubmit.co/ajax/theopalsnowdrop@gmail.com" method="POST">
                     <h3>Start Your Commission</h3>
-                    <input type="text" placeholder="Your Name" required>
-                    <input type="email" placeholder="Your Email" required>
-                    <select>
+                    
+                    <input type="hidden" name="_subject" value="New Bespoke Commission Request!">
+                    <input type="hidden" name="_captcha" value="false">
+
+                    <input type="text" name="name" placeholder="Your Name" required>
+                    <input type="email" name="email" placeholder="Your Email" required>
+                    
+                    <select name="occasion" required>
                         <option value="" disabled selected>Occasion Type</option>
                         <option value="wedding">Wedding Favours</option>
                         <option value="gift">Personal Gift</option>
                         <option value="corporate">Corporate Event</option>
                         <option value="other">Other</option>
                     </select>
-                    <textarea placeholder="Describe your vision (scents, colors, quantities)..." rows="4"></textarea>
+                    
+                    <textarea name="message" placeholder="Describe your vision (scents, colors, quantities)..." rows="4" required></textarea>
+                    
                     <button type="submit" class="btn-dark">Request Quote</button>
+                    
+                    <p id="form-status" style="margin-top: 10px; font-weight: bold; font-size: 0.9rem;"></p>
                 </form>
             </div>
         </div>
