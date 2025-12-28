@@ -1,1 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Opal Snowdrop | Candles & Wax Melts</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Lato:wght@300;400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
 
+    <nav class="navbar">
+        <div class="logo">The Opal Snowdrop 🌸</div>
+        <ul class="nav-links">
+            <li><a href="#home">Home</a></li>
+            <li><a href="#candles">Candles</a></li>
+            <li><a href="#wax-melts">Wax Melts</a></li>
+            <li><a href="#bespoke">Bespoke</a></li>
+        </ul>
+        <div class="cart-icon" onclick="toggleCart()">
+            🛒 <span id="cart-count">0</span>
+        </div>
+    </nav>
+
+    <header id="home" class="hero">
+        <div class="hero-content">
+            <h1>Scent the Moments That Matter</h1>
+            <p>Hand-poured luxury candles and botanical wax melts from Westgate-on-Sea.</p>
+            <a href="#candles" class="btn">Shop Collection</a>
+        </div>
+    </header>
+
+    <section id="candles" class="product-section">
+        <h2>Signature Candles</h2>
+        <p class="section-subtitle">Soy-blend wax, wood wicks, and eternal elegance.</p>
+        
+        <div class="product-grid">
+            <div class="product-card">
+                <div class="image-placeholder">🕯️</div>
+                <h3>Pink Peony & Blush</h3>
+                <p>Floral notes with a soft suede finish.</p>
+                <span class="price">£18.00</span>
+                <button class="btn-add" onclick="addToCart('Pink Peony Candle', 18.00)">Add to Cart</button>
+            </div>
+            <div class="product-card">
+                <div class="image-placeholder">🕯️</div>
+                <h3>Midnight Amber</h3>
+                <p>Deep, resinous, and warm.</p>
+                <span class="price">£22.00</span>
+                <button class="btn-add" onclick="addToCart('Midnight Amber Candle', 22.00)">Add to Cart</button>
+            </div>
+            <div class="product-card">
+                <div class="image-placeholder">🕯️</div>
+                <h3>Coastal Breeze</h3>
+                <p>Fresh linen and sea salt.</p>
+                <span class="price">£18.00</span>
+                <button class="btn-add" onclick="addToCart('Coastal Breeze Candle', 18.00)">Add to Cart</button>
+            </div>
+        </div>
+    </section>
+
+    <section id="wax-melts" class="product-section alt-bg">
+        <h2>Luxury Wax Melts</h2>
+        <p class="section-subtitle">Highly scented botanical snap bars.</p>
+        
+        <div class="product-grid">
+            <div class="product-card">
+                <div class="image-placeholder">🧼</div>
+                <h3>Lavender & Chamomile</h3>
+                <p>Perfect for relaxation rituals.</p>
+                <span class="price">£6.50</span>
+                <button class="btn-add" onclick="addToCart('Lavender Melt', 6.50)">Add to Cart</button>
+            </div>
+            <div class="product-card">
+                <div class="image-placeholder">🧼</div>
+                <h3>Spiced Orange</h3>
+                <p>Zesty warmth for cozy evenings.</p>
+                <span class="price">£6.50</span>
+                <button class="btn-add" onclick="addToCart('Spiced Orange Melt', 6.50)">Add to Cart</button>
+            </div>
+        </div>
+    </section>
+
+    <section id="bespoke" class="bespoke-section">
+        <div class="bespoke-container">
+            <div class="bespoke-text">
+                <h2>The Bespoke Studio ✨</h2>
+                <p>Looking for something unique? Whether it's wedding favours, corporate gifts, or a personal signature scent, we create custom orders just for you.</p>
+                <ul>
+                    <li>Choose your vessel style</li>
+                    <li>Select your fragrance profile</li>
+                    <li>Personalized labels & packaging</li>
+                </ul>
+            </div>
+            <div class="bespoke-form-wrapper">
+                <form id="bespoke-form" onsubmit="handleBespokeSubmit(event)">
+                    <h3>Start Your Commission</h3>
+                    <input type="text" placeholder="Your Name" required>
+                    <input type="email" placeholder="Your Email" required>
+                    <select>
+                        <option value="" disabled selected>Occasion Type</option>
+                        <option value="wedding">Wedding Favours</option>
+                        <option value="gift">Personal Gift</option>
+                        <option value="corporate">Corporate Event</option>
+                        <option value="other">Other</option>
+                    </select>
+                    <textarea placeholder="Describe your vision (scents, colors, quantities)..." rows="4"></textarea>
+                    <button type="submit" class="btn-dark">Request Quote</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h4>The Opal Snowdrop</h4>
+                <p>Westgate-on-Sea, United Kingdom</p>
+                <p>07800 963159</p>
+            </div>
+            <div class="footer-section">
+                <h4>Quick Links</h4>
+                <a href="#candles">Shop Candles</a>
+                <a href="#bespoke">Bespoke Orders</a>
+                <a href="#">Shipping Policy</a>
+            </div>
+        </div>
+        <div class="copyright">
+            &copy; 2025 The Opal Snowdrop. All rights reserved.
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
