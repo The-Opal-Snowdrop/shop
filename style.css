@@ -1,1 +1,259 @@
+:root {
+    --primary-color: #2c3e50; /* Dark Slate */
+    --accent-color: #8fbc8f;  /* Dark Sea Green / Sage */
+    --bg-color: #f9f9f9;      /* Off White */
+    --white: #ffffff;
+    --font-heading: 'Playfair Display', serif;
+    --font-body: 'Lato', sans-serif;
+}
 
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: var(--font-body);
+    background-color: var(--bg-color);
+    color: var(--primary-color);
+    line-height: 1.6;
+}
+
+/* Navigation */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 5%;
+    background: var(--white);
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.logo {
+    font-family: var(--font-heading);
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--primary-color);
+}
+
+.nav-links {
+    list-style: none;
+    display: flex;
+    gap: 2rem;
+}
+
+.nav-links a {
+    text-decoration: none;
+    color: var(--primary-color);
+    font-weight: 400;
+    transition: color 0.3s;
+}
+
+.nav-links a:hover {
+    color: var(--accent-color);
+}
+
+.cart-icon {
+    cursor: pointer;
+    font-size: 1.2rem;
+}
+
+/* Hero Section */
+.hero {
+    height: 60vh;
+    background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('https://placehold.co/1200x600/e0e0e0/555?text=Candle+Hero+Image'); /* REPLACE WITH REAL IMAGE */
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: var(--white);
+}
+
+.hero h1 {
+    font-family: var(--font-heading);
+    font-size: 3rem;
+    margin-bottom: 1rem;
+}
+
+.btn {
+    display: inline-block;
+    padding: 10px 25px;
+    background-color: var(--accent-color);
+    color: var(--white);
+    text-decoration: none;
+    margin-top: 20px;
+    border-radius: 2px;
+    transition: background 0.3s;
+}
+
+.btn:hover {
+    background-color: #76a076;
+}
+
+/* Products */
+.product-section {
+    padding: 4rem 5%;
+    text-align: center;
+}
+
+.section-subtitle {
+    color: #666;
+    margin-bottom: 3rem;
+    font-style: italic;
+}
+
+.product-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+}
+
+.product-card {
+    background: var(--white);
+    padding: 20px;
+    border: 1px solid #eee;
+    transition: transform 0.3s;
+}
+
+.product-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+}
+
+.image-placeholder {
+    height: 200px;
+    background-color: #eee;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 3rem;
+    margin-bottom: 15px;
+}
+
+.product-card h3 {
+    font-family: var(--font-heading);
+    margin-bottom: 5px;
+}
+
+.price {
+    display: block;
+    font-weight: bold;
+    color: var(--accent-color);
+    margin: 10px 0;
+}
+
+.btn-add {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid var(--primary-color);
+    background: transparent;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.btn-add:hover {
+    background: var(--primary-color);
+    color: var(--white);
+}
+
+/* Bespoke Section */
+.bespoke-section {
+    background-color: #eef2f3; /* Very light grey */
+    padding: 4rem 5%;
+}
+
+.bespoke-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4rem;
+    align-items: center;
+}
+
+.bespoke-text {
+    flex: 1;
+    min-width: 300px;
+}
+
+.bespoke-text h2 {
+    font-family: var(--font-heading);
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+}
+
+.bespoke-text ul {
+    margin-top: 1.5rem;
+    list-style-position: inside;
+}
+
+.bespoke-form-wrapper {
+    flex: 1;
+    min-width: 300px;
+    background: var(--white);
+    padding: 2rem;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+}
+
+.bespoke-form-wrapper input,
+.bespoke-form-wrapper select,
+.bespoke-form-wrapper textarea {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ddd;
+    font-family: var(--font-body);
+}
+
+.btn-dark {
+    width: 100%;
+    padding: 12px;
+    background: var(--primary-color);
+    color: var(--white);
+    border: none;
+    cursor: pointer;
+}
+
+/* Footer */
+footer {
+    background: var(--primary-color);
+    color: var(--white);
+    padding: 3rem 5% 1rem;
+}
+
+.footer-content {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    margin-bottom: 2rem;
+}
+
+.footer-section a {
+    color: #ccc;
+    display: block;
+    margin-bottom: 5px;
+    text-decoration: none;
+}
+
+.copyright {
+    text-align: center;
+    border-top: 1px solid #444;
+    padding-top: 1rem;
+    font-size: 0.9rem;
+    color: #ccc;
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 768px) {
+    .nav-links {
+        display: none; /* In a real app, add a hamburger menu toggle */
+    }
+    
+    .hero h1 {
+        font-size: 2rem;
+    }
+}
