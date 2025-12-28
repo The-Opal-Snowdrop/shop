@@ -1,7 +1,7 @@
 :root {
-    --primary-color: #2c3e50; /* Dark Slate */
-    --accent-color: #8fbc8f;  /* Dark Sea Green / Sage */
-    --bg-color: #f9f9f9;      /* Off White */
+    --primary-color: #2c3e50;
+    --accent-color: #8fbc8f;
+    --bg-color: #f9f9f9;
     --white: #ffffff;
     --font-heading: 'Playfair Display', serif;
     --font-body: 'Lato', sans-serif;
@@ -25,7 +25,7 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 1rem 5%;
+    padding: 0.8rem 5%; /* Adjusted padding */
     background: var(--white);
     box-shadow: 0 2px 5px rgba(0,0,0,0.05);
     position: sticky;
@@ -33,12 +33,25 @@ body {
     z-index: 1000;
 }
 
-.logo {
+/* NEW LOGO STYLES */
+.logo-container {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.nav-logo {
+    height: 50px; /* Adjust this to make your logo bigger or smaller */
+    width: auto;
+}
+
+.logo-text {
     font-family: var(--font-heading);
     font-size: 1.5rem;
     font-weight: 700;
     color: var(--primary-color);
 }
+/* END NEW LOGO STYLES */
 
 .nav-links {
     list-style: none;
@@ -65,7 +78,7 @@ body {
 /* Hero Section */
 .hero {
     height: 60vh;
-    background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('https://placehold.co/1200x600/e0e0e0/555?text=Candle+Hero+Image'); /* REPLACE WITH REAL IMAGE */
+    background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('https://placehold.co/1200x600/e0e0e0/555?text=Candle+Hero+Image');
     background-size: cover;
     background-position: center;
     display: flex;
@@ -164,7 +177,7 @@ body {
 
 /* Bespoke Section */
 .bespoke-section {
-    background-color: #eef2f3; /* Very light grey */
+    background-color: #eef2f3;
     padding: 4rem 5%;
 }
 
@@ -247,12 +260,10 @@ footer {
     color: #ccc;
 }
 
-/* Mobile Responsiveness */
 @media (max-width: 768px) {
     .nav-links {
-        display: none; /* In a real app, add a hamburger menu toggle */
+        display: none;
     }
-    
     .hero h1 {
         font-size: 2rem;
     }
