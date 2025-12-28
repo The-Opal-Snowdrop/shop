@@ -10,9 +10,9 @@ Welcome to the repository for **The Opal Snowdrop Online Store**. This project i
 
 Moving beyond a simple gallery, this site serves as a fully functional digital storefront where customers can browse our seasonal collections of candles and wax melts, or commission unique custom pieces through our **Bespoke Studio**.
 
-## 🚀 Live Store
+## 🚀 The Opal Snowdrop
 
-🛍️ **Start Shopping Here:** [https://the-opal-snowdrop.github.io/galleria/](https://the-opal-snowdrop.github.io/galleria/)
+🛍️ **Brand Info:** [https://the-opal-snowdrop.github.io/galleria/](https://the-opal-snowdrop.github.io/galleria/)
 
 ## ✨ Key Features
 
