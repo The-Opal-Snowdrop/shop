@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checkout | The Opal Snowdrop</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Lato:wght@300;400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .checkout-container { max-width: 600px; margin: 40px auto; background: white; padding: 40px; border-radius: 8px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); }
+        .form-row { display: flex; gap: 15px; }
+        .form-group { flex: 1; margin-bottom: 15px; }
+        label { display: block; margin-bottom: 5px; font-weight: bold; font-size: 0.9rem; }
+        input { width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 4px; }
+    </style>
+</head>
+<body style="background-color: #f9f9f9;">
+
+    <nav class="navbar">
+        <div class="logo-container">
+            <span class="logo-text">The Opal Snowdrop</span>
+        </div>
+    </nav>
+
+    <div class="checkout-container">
+        <h2>Secure Checkout</h2>
+        <p style="margin-bottom: 20px; color: #666;">Please enter your shipping details.</p>
+
+        <form id="checkoutForm">
+            <h3>Shipping Address</h3>
+            <div class="form-group">
+                <label>Full Name</label>
+                <input type="text" required>
+            </div>
+            <div class="form-group">
+                <label>Address Line 1</label>
+                <input type="text" required>
+            </div>
+            <div class="form-row">
+                <div class="form-group">
+                    <label>City</label>
+                    <input type="text" required>
+                </div>
+                <div class="form-group">
+                    <label>Postcode</label>
+                    <input type="text" required>
+                </div>
+            </div>
+
+            <h3 style="margin-top: 20px;">Payment Details (Simulation)</h3>
+            <div class="form-group">
+                <label>Card Number</label>
+                <input type="text" placeholder="0000 0000 0000 0000" maxlength="19" required>
+            </div>
+            <div class="form-row">
+                <div class="form-group">
+                    <label>Expiry</label>
+                    <input type="text" placeholder="MM/YY" maxlength="5" required>
+                </div>
+                <div class="form-group">
+                    <label>CVC</label>
+                    <input type="text" placeholder="123" maxlength="3" required>
+                </div>
+            </div>
+
+            <button type="submit" class="btn-dark" style="margin-top: 20px;">Place Order</button>
+        </form>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
