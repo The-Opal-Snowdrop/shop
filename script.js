@@ -1,52 +1,86 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Create Account | The Opal Snowdrop</title>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Lato:wght@300;400&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style.css">
-</head>
-<body class="login-page">
+document.addEventListener("DOMContentLoaded", function() {
 
-    <nav class="navbar">
-        <div class="logo-container">
-            <img src="assets/logo.jpg" alt="The Opal Snowdrop Logo" class="nav-logo" style="height: 60px; width: auto;">
-            <span class="logo-text">The Opal Snowdrop</span>
-        </div>
-        <ul class="nav-links">
-            <li><a href="index.html">Back to Home</a></li>
-        </ul>
-    </nav>
+    // --- 1. BESPOKE CONTACT FORM ---
+    const contactForm = document.getElementById("contactForm");
+    const statusMsg = document.getElementById("form-status");
 
-    <div class="login-wrapper">
-        <div class="login-container">
-            <h2>Create Account</h2>
-            <p>Join us for exclusive scents and updates.</p>
+    if (contactForm) {
+        contactForm.addEventListener("submit", function(event) {
+            event.preventDefault();
+            const formData = new FormData(contactForm);
+            statusMsg.innerText = "Sending your request...";
+            statusMsg.style.color = "#555";
+
+            fetch(contactForm.action, {
+                method: "POST",
+                body: formData,
+                headers: { 'Accept': 'application/json' }
+            })
+            .then(response => {
+                if (response.ok) {
+                    statusMsg.innerText = "Thank you! We have received your request.";
+                    statusMsg.style.color = "green";
+                    contactForm.reset();
+                } else {
+                    statusMsg.innerText = "Oops! Problem submitting form.";
+                    statusMsg.style.color = "red";
+                }
+            })
+            .catch(error => {
+                statusMsg.innerText = "Network error. Please try again.";
+                statusMsg.style.color = "red";
+            });
+        });
+    }
+
+    // --- 2. LOGIN FORM ---
+    const loginForm = document.getElementById("loginForm");
+    if (loginForm) {
+        loginForm.addEventListener("submit", function(event) {
+            event.preventDefault();
+            alert("Login Successful! (This is a demo)");
+            window.location.href = "index.html"; 
+        });
+    }
+
+    // --- 3. NEW: REGISTER FORM LOGIC ---
+    const registerForm = document.getElementById("registerForm");
+    if (registerForm) {
+        registerForm.addEventListener("submit", function(event) {
+            event.preventDefault();
             
-            <form id="registerForm">
-                <input type="text" name="fullname" placeholder="Full Name" required>
-                <input type="email" name="email" placeholder="Email Address" required>
-                <input type="password" name="password" id="reg-password" placeholder="Password" required>
-                <input type="password" name="confirm-password" id="reg-confirm" placeholder="Confirm Password" required>
-                
-                <button type="submit" class="btn-dark">Sign Up</button>
-            </form>
-            
-            <div class="login-footer">
-                <span>Already have an account?</span>
-                <span class="divider">|</span>
-                <a href="login.html">Login here</a>
-            </div>
-        </div>
-    </div>
+            // Get the values
+            const password = document.getElementById("reg-password").value;
+            const confirm = document.getElementById("reg-confirm").value;
 
-    <footer>
-        <div class="copyright">
-            &copy; 2025 The Opal Snowdrop. All rights reserved.
-        </div>
-    </footer>
+            // Check if passwords match
+            if (password !== confirm) {
+                alert("Passwords do not match! Please try again.");
+                return; // Stop here
+            }
 
-    <script src="script.js"></script>
-</body>
-</html>
+            // Success
+            alert("Account Created Successfully! \nWelcome to The Opal Snowdrop.");
+            window.location.href = "index.html"; // Redirect to home
+        });
+    }
+});
+
+// --- SHOPPING CART LOGIC (Keep this outside the event listener) ---
+let cartCount = 0;
+let cartTotal = 0.00;
+
+function addToCart(productName, price) {
+    cartCount++;
+    document.getElementById('cart-count').innerText = cartCount;
+    cartTotal += price;
+    alert(`${productName} added to cart! \nTotal: £${cartTotal.toFixed(2)}`);
+}
+
+function toggleCart() {
+    if(cartCount > 0) {
+        alert(`You have ${cartCount} items in your cart. \nTotal: £${cartTotal.toFixed(2)}`);
+    } else {
+        alert("Your cart is empty.");
+    }
+}
