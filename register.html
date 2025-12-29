@@ -1,1 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Account | The Opal Snowdrop</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Lato:wght@300;400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="login-page">
 
+    <nav class="navbar">
+        <div class="logo-container">
+            <img src="assets/logo.jpg" alt="The Opal Snowdrop Logo" class="nav-logo" style="height: 60px; width: auto;">
+            <span class="logo-text">The Opal Snowdrop</span>
+        </div>
+        <ul class="nav-links">
+            <li><a href="index.html">Back to Home</a></li>
+        </ul>
+    </nav>
+
+    <div class="login-wrapper">
+        <div class="login-container">
+            <h2>Create Account</h2>
+            <p>Join us for exclusive scents and updates.</p>
+            
+            <form id="registerForm">
+                <input type="text" name="fullname" placeholder="Full Name" required>
+                <input type="email" name="email" placeholder="Email Address" required>
+                <input type="password" name="password" id="reg-password" placeholder="Password" required>
+                <input type="password" name="confirm-password" id="reg-confirm" placeholder="Confirm Password" required>
+                
+                <button type="submit" class="btn-dark">Sign Up</button>
+            </form>
+            
+            <div class="login-footer">
+                <span>Already have an account?</span>
+                <span class="divider">|</span>
+                <a href="login.html">Login here</a>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="copyright">
+            &copy; 2025 The Opal Snowdrop. All rights reserved.
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
