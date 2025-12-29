@@ -25,7 +25,7 @@ function toggleCart() {
 
 document.addEventListener("DOMContentLoaded", function() {
 
-    // --- CHECK LOGIN STATUS ON LOAD ---
+    // Check login state on every page load
     checkLoginState();
 
     // --- A. REGISTER FORM ---
@@ -33,7 +33,6 @@ document.addEventListener("DOMContentLoaded", function() {
     if (registerForm) {
         registerForm.addEventListener("submit", function(event) {
             event.preventDefault();
-            
             const fullname = registerForm.querySelector('input[name="fullname"]').value;
             const email = registerForm.querySelector('input[name="email"]').value;
             const password = document.getElementById("reg-password").value;
@@ -44,7 +43,6 @@ document.addEventListener("DOMContentLoaded", function() {
                 return;
             }
 
-            // Save the USER ACCOUNT to Local Storage
             const user = { name: fullname, email: email, password: password };
             localStorage.setItem('opalUser', JSON.stringify(user));
 
@@ -58,10 +56,8 @@ document.addEventListener("DOMContentLoaded", function() {
     if (loginForm) {
         loginForm.addEventListener("submit", function(event) {
             event.preventDefault();
-
             const inputEmail = loginForm.querySelector('input[type="email"]').value;
             const inputPassword = loginForm.querySelector('input[type="password"]').value;
-
             const storedData = localStorage.getItem('opalUser');
 
             if (!storedData) {
@@ -72,9 +68,7 @@ document.addEventListener("DOMContentLoaded", function() {
             const user = JSON.parse(storedData);
 
             if (inputEmail === user.email && inputPassword === user.password) {
-                // Save the ACTIVE SESSION (This keeps them logged in)
                 localStorage.setItem('currentUser', JSON.stringify(user));
-                
                 alert(`Welcome back, ${user.name}!`);
                 window.location.href = "index.html"; 
             } else {
@@ -83,7 +77,7 @@ document.addEventListener("DOMContentLoaded", function() {
         });
     }
 
-    // --- C. FORGOT PASSWORD ---
+    // --- C. FORGOT PASSWORD (Step 1: Request Link) ---
     const forgotForm = document.getElementById("forgotForm");
     if (forgotForm) {
         forgotForm.addEventListener("submit", function(event) {
@@ -94,8 +88,13 @@ document.addEventListener("DOMContentLoaded", function() {
             if (storedData) {
                 const user = JSON.parse(storedData);
                 if (user.email === inputEmail) {
-                    alert(`✅ Reset link sent to ${inputEmail}`);
-                    window.location.href = "login.html";
+                    // STORE THE EMAIL TEMPORARILY so we know who to update
+                    sessionStorage.setItem('resetEmail', inputEmail);
+                    
+                    alert(`✅ (Simulation)\nEmail sent to ${inputEmail}.\n\nClick OK to simulate clicking the email link...`);
+                    
+                    // Redirect to the new Reset Page
+                    window.location.href = "reset-password.html";
                 } else {
                     alert("Email not found.");
                 }
@@ -105,10 +104,49 @@ document.addEventListener("DOMContentLoaded", function() {
         });
     }
 
-    // --- D. CONTACT FORM ---
+    // --- D. RESET PASSWORD (Step 2: Enter New Password) ---
+    const resetForm = document.getElementById("resetForm");
+    if (resetForm) {
+        resetForm.addEventListener("submit", function(event) {
+            event.preventDefault();
+            
+            const newPass = document.getElementById("new-password").value;
+            const confirmPass = document.getElementById("confirm-new-password").value;
+            
+            // 1. Check matching
+            if (newPass !== confirmPass) {
+                alert("Passwords do not match!");
+                return;
+            }
+
+            // 2. Find the user
+            const emailToReset = sessionStorage.getItem('resetEmail');
+            const storedData = localStorage.getItem('opalUser');
+
+            if (storedData && emailToReset) {
+                let user = JSON.parse(storedData);
+                
+                // 3. Update the password
+                if (user.email === emailToReset) {
+                    user.password = newPass;
+                    localStorage.setItem('opalUser', JSON.stringify(user)); // Save back to DB
+                    
+                    // Clear the temporary session
+                    sessionStorage.removeItem('resetEmail');
+                    
+                    alert("Password updated successfully! \nPlease log in with your new password.");
+                    window.location.href = "login.html";
+                }
+            } else {
+                alert("Error: Session expired. Please try requesting a reset link again.");
+                window.location.href = "forgot-password.html";
+            }
+        });
+    }
+
+    // --- E. CONTACT FORM ---
     const contactForm = document.getElementById("contactForm");
     const statusMsg = document.getElementById("form-status");
-
     if (contactForm) {
         contactForm.addEventListener("submit", function(event) {
             event.preventDefault();
@@ -137,29 +175,19 @@ document.addEventListener("DOMContentLoaded", function() {
    ========================================= */
 
 function checkLoginState() {
-    // Check if someone is currently logged in
     const currentUserData = localStorage.getItem('currentUser');
-    
-    // We look for the "My Account" link in the navbar
     const accountLink = document.querySelector('.login-link');
     const dropdownMenu = document.querySelector('.dropdown-menu');
 
     if (currentUserData && accountLink && dropdownMenu) {
         const currentUser = JSON.parse(currentUserData);
-        
-        // 1. Change "My Account" to the user's name
-        accountLink.innerHTML = `👤 Hi, ${currentUser.name.split(' ')[0]} ▾`; // Uses first name
-        
-        // 2. Change the dropdown menu options
-        dropdownMenu.innerHTML = `
-            <a href="#" onclick="logout()">Sign Out</a>
-        `;
+        accountLink.innerHTML = `👤 Hi, ${currentUser.name.split(' ')[0]} ▾`;
+        dropdownMenu.innerHTML = `<a href="#" onclick="logout()">Sign Out</a>`;
     }
 }
 
 function logout() {
-    // Clear the active session
     localStorage.removeItem('currentUser');
     alert("You have been signed out.");
-    window.location.href = "index.html"; // Refresh the page
+    window.location.href = "index.html"; 
 }
