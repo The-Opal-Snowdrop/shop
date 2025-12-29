@@ -29,33 +29,23 @@ document.addEventListener("DOMContentLoaded", function() {
     const registerForm = document.getElementById("registerForm");
     if (registerForm) {
         registerForm.addEventListener("submit", function(event) {
-            event.preventDefault(); // Stop page reload
+            event.preventDefault();
             
-            // 1. Get values from the inputs
             const fullname = registerForm.querySelector('input[name="fullname"]').value;
             const email = registerForm.querySelector('input[name="email"]').value;
             const password = document.getElementById("reg-password").value;
             const confirm = document.getElementById("reg-confirm").value;
 
-            // 2. Validate Password Match
             if (password !== confirm) {
                 alert("Passwords do not match!");
                 return;
             }
 
-            // 3. Save to Local Storage (The "Mock Database")
-            // We create a simple object to represent the user
-            const user = {
-                name: fullname,
-                email: email,
-                password: password // In a real app, never store passwords like this!
-            };
-
-            // Save it as a string
+            const user = { name: fullname, email: email, password: password };
             localStorage.setItem('opalUser', JSON.stringify(user));
 
             alert("Account Created Successfully! \nYou can now log in.");
-            window.location.href = "login.html"; // Send them to login page
+            window.location.href = "login.html"; 
         });
     }
 
@@ -68,7 +58,6 @@ document.addEventListener("DOMContentLoaded", function() {
             const inputEmail = loginForm.querySelector('input[type="email"]').value;
             const inputPassword = loginForm.querySelector('input[type="password"]').value;
 
-            // 1. Get the stored user from Local Storage
             const storedData = localStorage.getItem('opalUser');
 
             if (!storedData) {
@@ -78,17 +67,42 @@ document.addEventListener("DOMContentLoaded", function() {
 
             const user = JSON.parse(storedData);
 
-            // 2. Check credentials
             if (inputEmail === user.email && inputPassword === user.password) {
                 alert(`Welcome back, ${user.name}!`);
-                window.location.href = "index.html"; // Redirect to home
+                window.location.href = "index.html"; 
             } else {
                 alert("Incorrect email or password.");
             }
         });
     }
 
-    // --- C. CONTACT FORM ---
+    // --- C. FORGOT PASSWORD FORM (New) ---
+    const forgotForm = document.getElementById("forgotForm");
+    if (forgotForm) {
+        forgotForm.addEventListener("submit", function(event) {
+            event.preventDefault();
+            
+            const inputEmail = forgotForm.querySelector('input[name="email"]').value;
+            const storedData = localStorage.getItem('opalUser');
+
+            // Check if user exists in our "Mock Database"
+            if (storedData) {
+                const user = JSON.parse(storedData);
+                if (user.email === inputEmail) {
+                    alert(`✅ A password reset link has been sent to ${inputEmail}\n(Check your inbox!)`);
+                    // In a real app, this sends an email. 
+                    // In this demo, we just show the success message.
+                    window.location.href = "login.html";
+                } else {
+                    alert("We could not find an account with that email address.");
+                }
+            } else {
+                alert("No accounts exist yet. Please create one first.");
+            }
+        });
+    }
+
+    // --- D. CONTACT FORM ---
     const contactForm = document.getElementById("contactForm");
     const statusMsg = document.getElementById("form-status");
 
