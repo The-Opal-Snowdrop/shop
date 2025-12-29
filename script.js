@@ -20,49 +20,39 @@ function toggleCart() {
 }
 
 /* =========================================
-   2. Bespoke Form Handler (No Redirect)
+   2. Form Handlers (Wait for Page Load)
    ========================================= */
 
-// Wait for the DOM to load
 document.addEventListener("DOMContentLoaded", function() {
 
-    const form = document.getElementById("contactForm");
+    // --- BESPOKE FORM ---
+    const contactForm = document.getElementById("contactForm");
     const statusMsg = document.getElementById("form-status");
 
-    if (form) {
-        form.addEventListener("submit", function(event) {
-            
-            // 1. Prevent the browser from going to the new page
-            event.preventDefault(); 
+    if (contactForm) {
+        contactForm.addEventListener("submit", function(event) {
+            event.preventDefault(); // Stop redirect
+            const formData = new FormData(contactForm);
 
-            // 2. Gather form data
-            const formData = new FormData(form);
-
-            // 3. Show "Sending..." message
             statusMsg.innerText = "Sending your request...";
             statusMsg.style.color = "#555";
 
-            // 4. Send silently
-            fetch(form.action, {
+            fetch(contactForm.action, {
                 method: "POST",
                 body: formData,
-                headers: {
-                    'Accept': 'application/json'
-                }
+                headers: { 'Accept': 'application/json' }
             })
             .then(response => {
                 if (response.ok) {
-                    // Success!
                     statusMsg.innerText = "Thank you! We have received your request.";
                     statusMsg.style.color = "green";
-                    form.reset(); // Clears the form inputs
+                    contactForm.reset();
                 } else {
-                    // Error
                     response.json().then(data => {
                         if (Object.hasOwn(data, 'errors')) {
                             statusMsg.innerText = data["errors"].map(error => error["message"]).join(", ");
                         } else {
-                            statusMsg.innerText = "Oops! There was a problem submitting your form.";
+                            statusMsg.innerText = "Oops! Problem submitting form.";
                         }
                         statusMsg.style.color = "red";
                     });
@@ -72,6 +62,16 @@ document.addEventListener("DOMContentLoaded", function() {
                 statusMsg.innerText = "Oops! Network error. Please try again.";
                 statusMsg.style.color = "red";
             });
+        });
+    }
+
+    // --- LOGIN FORM ---
+    const loginForm = document.getElementById("loginForm");
+    if (loginForm) {
+        loginForm.addEventListener("submit", function(event) {
+            event.preventDefault();
+            alert("Login Successful! (This is a demo)");
+            window.location.href = "index.html"; // Redirect to home
         });
     }
 
