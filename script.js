@@ -1,78 +1,52 @@
-/* =========================================
-   1. Shopping Cart Logic
-   ========================================= */
-let cartCount = 0;
-let cartTotal = 0.00;
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Account | The Opal Snowdrop</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Lato:wght@300;400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="login-page">
 
-function addToCart(productName, price) {
-    cartCount++;
-    document.getElementById('cart-count').innerText = cartCount;
-    cartTotal += price;
-    alert(`${productName} added to cart! \nCurrent Total: £${cartTotal.toFixed(2)}`);
-}
+    <nav class="navbar">
+        <div class="logo-container">
+            <img src="assets/logo.jpg" alt="The Opal Snowdrop Logo" class="nav-logo" style="height: 60px; width: auto;">
+            <span class="logo-text">The Opal Snowdrop</span>
+        </div>
+        <ul class="nav-links">
+            <li><a href="index.html">Back to Home</a></li>
+        </ul>
+    </nav>
 
-function toggleCart() {
-    if(cartCount > 0) {
-        alert(`You have ${cartCount} items in your cart. \nTotal: £${cartTotal.toFixed(2)} \n\n(Checkout feature coming soon!)`);
-    } else {
-        alert("Your cart is empty.");
-    }
-}
+    <div class="login-wrapper">
+        <div class="login-container">
+            <h2>Create Account</h2>
+            <p>Join us for exclusive scents and updates.</p>
+            
+            <form id="registerForm">
+                <input type="text" name="fullname" placeholder="Full Name" required>
+                <input type="email" name="email" placeholder="Email Address" required>
+                <input type="password" name="password" id="reg-password" placeholder="Password" required>
+                <input type="password" name="confirm-password" id="reg-confirm" placeholder="Confirm Password" required>
+                
+                <button type="submit" class="btn-dark">Sign Up</button>
+            </form>
+            
+            <div class="login-footer">
+                <span>Already have an account?</span>
+                <span class="divider">|</span>
+                <a href="login.html">Login here</a>
+            </div>
+        </div>
+    </div>
 
-/* =========================================
-   2. Form Handlers (Wait for Page Load)
-   ========================================= */
+    <footer>
+        <div class="copyright">
+            &copy; 2025 The Opal Snowdrop. All rights reserved.
+        </div>
+    </footer>
 
-document.addEventListener("DOMContentLoaded", function() {
-
-    // --- BESPOKE FORM ---
-    const contactForm = document.getElementById("contactForm");
-    const statusMsg = document.getElementById("form-status");
-
-    if (contactForm) {
-        contactForm.addEventListener("submit", function(event) {
-            event.preventDefault(); // Stop redirect
-            const formData = new FormData(contactForm);
-
-            statusMsg.innerText = "Sending your request...";
-            statusMsg.style.color = "#555";
-
-            fetch(contactForm.action, {
-                method: "POST",
-                body: formData,
-                headers: { 'Accept': 'application/json' }
-            })
-            .then(response => {
-                if (response.ok) {
-                    statusMsg.innerText = "Thank you! We have received your request.";
-                    statusMsg.style.color = "green";
-                    contactForm.reset();
-                } else {
-                    response.json().then(data => {
-                        if (Object.hasOwn(data, 'errors')) {
-                            statusMsg.innerText = data["errors"].map(error => error["message"]).join(", ");
-                        } else {
-                            statusMsg.innerText = "Oops! Problem submitting form.";
-                        }
-                        statusMsg.style.color = "red";
-                    });
-                }
-            })
-            .catch(error => {
-                statusMsg.innerText = "Oops! Network error. Please try again.";
-                statusMsg.style.color = "red";
-            });
-        });
-    }
-
-    // --- LOGIN FORM ---
-    const loginForm = document.getElementById("loginForm");
-    if (loginForm) {
-        loginForm.addEventListener("submit", function(event) {
-            event.preventDefault();
-            alert("Login Successful! (This is a demo)");
-            window.location.href = "index.html"; // Redirect to home
-        });
-    }
-
-});
+    <script src="script.js"></script>
+</body>
+</html>
