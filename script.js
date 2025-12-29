@@ -65,11 +65,47 @@ document.addEventListener("DOMContentLoaded", function() {
         renderCartPage();
     }
 
-    // --- B. CHECKOUT FORM ---
+// --- B. CHECKOUT FORM WITH VALIDATION ---
     const checkoutForm = document.getElementById("checkoutForm");
     if (checkoutForm) {
         checkoutForm.addEventListener("submit", function(event) {
-            event.preventDefault();
+            event.preventDefault(); // Stop the form from submitting immediately
+
+            // 1. GET VALUES
+            const cardInput = checkoutForm.querySelector('input[placeholder="0000 0000 0000 0000"]');
+            const postcodeInput = checkoutForm.querySelector('input[placeholder="Postcode"]'); // We need to add this ID or placeholder to HTML
+            const addressInput = checkoutForm.querySelector('input[placeholder="Address Line 1"]');
+
+            const cardNumber = cardInput.value.replace(/\s+/g, ''); // Remove spaces
+            const postcode = postcodeInput ? postcodeInput.value.toUpperCase().trim() : "";
+            const address = addressInput.value.trim();
+
+            // 2. VALIDATION CHECKS
+
+            // CHECK A: Is the address too short? (Fake address check)
+            if (address.length < 5) {
+                alert("❌ Error: Please enter a valid, full address.");
+                return;
+            }
+
+            // CHECK B: Is the Card Number exactly 16 digits?
+            // Regex explanation: ^[0-9]{16}$ means "Start to finish must be 16 numbers"
+            if (!/^[0-9]{16}$/.test(cardNumber)) {
+                alert("❌ Payment Error: Card number must be exactly 16 digits.");
+                return;
+            }
+
+            // CHECK C: Is the Postcode valid? (UK Format Check)
+            // This Regex allows standard UK formats like SW1A 1AA, M1 1AA, etc.
+            const ukPostcodeRegex = /^[A-Z]{1,2}[0-9][A-Z0-9]? ?[0-9][A-Z]{2}$/;
+            
+            if (!ukPostcodeRegex.test(postcode)) {
+                alert("❌ Shipping Error: Please enter a valid UK Postcode (e.g., SW1A 1AA).");
+                return;
+            }
+
+            // 3. IF ALL CHECKS PASS
+            alert("✅ Payment Verified! Processing order...");
             
             // Simulation: Clear Cart and Redirect
             localStorage.removeItem('opalCart'); 
