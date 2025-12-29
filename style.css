@@ -85,24 +85,50 @@ body {
 
 /* Hero Section */
 .hero {
-    height: 60vh;
-    /* You can update this URL to your own hero image later */
-    background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('https://placehold.co/1200x600/e0e0e0/555?text=Candle+Hero+Image');
+    /* 1. We added a min-height so it doesn't get too squashed on small screens */
+    min-height: 60vh; 
+    
+    /* 2. We made the overlay darker (0.5 instead of 0.3) for better text contrast */
+    background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('assets/hero.jpg');
+    
     background-size: cover;
     background-position: center;
+    
+    /* Flexbox centers the content perfectly */
     display: flex;
     align-items: center;
     justify-content: center;
     text-align: center;
     color: var(--white);
+    
+    /* Prevents the navbar from covering the top if sticky acts up */
+    position: relative; 
+}
+
+/* New: Styles specifically for the text box inside the hero */
+.hero-content {
+    /* Creates a semi-transparent dark box behind the text */
+    background-color: rgba(0, 0, 0, 0.4); 
+    padding: 2rem;
+    border-radius: 8px;
+    border: 1px solid rgba(255, 255, 255, 0.2); /* Subtle white border */
+    max-width: 800px;
+    width: 90%; /* Ensures it doesn't touch the edges on mobile */
+    backdrop-filter: blur(5px); /* Optional: blurs the image slightly behind text for readability */
 }
 
 .hero h1 {
     font-family: var(--font-heading);
     font-size: 3rem;
     margin-bottom: 1rem;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.5); /* Text shadow for extra pop */
 }
 
+.hero p {
+    font-size: 1.2rem;
+    margin-bottom: 2rem;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+}
 .btn {
     display: inline-block;
     padding: 10px 25px;
