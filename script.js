@@ -91,7 +91,7 @@ document.addEventListener("DOMContentLoaded", function() {
                     // STORE THE EMAIL TEMPORARILY so we know who to update
                     sessionStorage.setItem('resetEmail', inputEmail);
                     
-                    alert(`✅ (Simulation)\nEmail sent to ${inputEmail}.\n\nClick OK to simulate clicking the email link...`);
+                    
                     
                     // Redirect to the new Reset Page
                     window.location.href = "reset-password.html";
