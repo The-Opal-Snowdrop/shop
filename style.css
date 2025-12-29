@@ -89,7 +89,7 @@ body {
     min-height: 60vh; 
     
     /* 2. We made the overlay darker (0.5 instead of 0.3) for better text contrast */
-    background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('assets/hero.jpg');
+    background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('assets/p10.jpeg');
     
     background-size: cover;
     background-position: center;
